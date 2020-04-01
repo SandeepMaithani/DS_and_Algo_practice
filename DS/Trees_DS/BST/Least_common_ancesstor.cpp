@@ -45,6 +45,8 @@ bstnode* insert(bstnode* root,int data) {
 	return root;
 }
 
+// Function to find the least common ancesstor of two given data
+
 bstnode* LCA(bstnode* root,int v1,int v2) {
 	
 	if(root == NULL) {
@@ -62,7 +64,7 @@ bstnode* LCA(bstnode* root,int v1,int v2) {
 		return root;
 	}
 	
-	if(left == NULL && right ==NULL) {
+	if(left == NULL && right == NULL) {
 		return NULL;
 	}
 	
