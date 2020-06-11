@@ -6,8 +6,6 @@ using namespace std;
 #include<bits/stdc++.h>
 using namespace std;
 
-//Recursion + Memoization
-
 int main() {
 	string a,b;
 	cin>>a>>b;
