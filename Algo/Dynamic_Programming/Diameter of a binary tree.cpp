@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//Time complexity O(n) 
+
+
 struct TreeNode
 {
 	int data;
@@ -24,7 +27,7 @@ int diameter(TreeNode* Root, int &answer) {
 
 	int temp = max(ltdia, rtdia) + 1;
 
-	int solution = left + right + 1;
+	int solution = ltdia + rtdia + 1;
 
 	answer = max(answer, solution);
 
