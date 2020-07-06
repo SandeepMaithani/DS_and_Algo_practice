@@ -39,7 +39,7 @@ int main() {
 		cin >> nums[i];
 	}
 
-	while (end < target) {
+	while (nums[end]< target) {
 		start = end;
 		end = 2 * end;
 	}
