@@ -42,6 +42,8 @@ int main() {
 		graph[vertex2].push_back(vertex1);
 	}
 
+	cin >> source >> destination;
+
 	cout << hasPath(graph, visited, source, destination) << endl;
 
 	return 0;
