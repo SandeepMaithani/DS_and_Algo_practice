@@ -4,26 +4,50 @@ using namespace std;
 #define endl "\n"
 typedef long long int ll;
 
-void hamiltonianHelper(vector<vector<int>>& graph)
+void hamiltonianHelper(vector<vector<int>>& graph, unordered_set<int>& hashSet, int source, string path, int initialPoint) {
+
+	if (hashSet.size() == graph.size() - 1) {
+		cout << path << endl;
+
+		bool isCycle = false;
+
+		for (auto neighbor : graph[source]) {
+			if (neighbor == initialPoint) {
+				isCycle = true;
+				break;
+			}
+		}
+
+		if (isCycle) {
+			cout << "hamiltonian Cycle" << endl;
+		}
+		else {
+			cout << "hamiltonian path" << endl;
+		}
+
+		return;
+	}
+
+	hashSet.insert(source);
+
+	for (auto neighbor : graph[source]) {
+		if (hashSet.find(neighbor) == hashSet.end()) {
+			hamiltonianHelper(graph, hashSet, neighbor, path + to_string(neighbor), initialPoint);
+		}
+	}
+
+	hashSet.erase(source);
+}
+
+
 
 int main() {
 
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-
-#ifndef ONLINE_JUDGE
-	// for getting input from input.txt
-	freopen("input1.txt", "r", stdin);
-	// for writing output to output.txt
-	freopen("output1.txt", "w", stdout);
-#endif
-
-	int vertexCount, edgeCount, pairCount = 0;
+	int vertexCount, edgeCount, initialPoint, source;
 	cin >> vertexCount >> edgeCount;
 
-	vector<vector<int>>componentHolder;
 	vector<vector<int>>graph(vertexCount);
-	vector<bool>visited(vertexCount, false);
+	unordered_set<int>hashSet;
 
 	for (int i = 0; i < edgeCount; i++) {
 		int vertex1, vertex2;
@@ -33,6 +57,9 @@ int main() {
 		graph[vertex2].push_back(vertex1);
 	}
 
+	cin >> source;
+
+	hamiltonianHelper(graph, hashSet, source, to_string(source) + "", source);
 
 	return 0;
 }
