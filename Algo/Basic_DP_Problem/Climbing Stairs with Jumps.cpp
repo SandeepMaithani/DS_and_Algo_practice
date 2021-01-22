@@ -30,7 +30,32 @@ using namespace std;
 #define endl "\n"
 typedef long long int ll;
 
-int countWaysMemo(int )
+
+//Using Recursion + Memoization
+
+
+int countWaysMemo(int curStep, int n, vector<int>&jump, vector<int>&dp) {
+
+	if (curStep == n) {
+		return 1;
+	}
+
+	cout << "hello" << curStep << endl
+
+	     int answer = 0;
+
+	for (int i = 1; i <= jump[curStep] && curStep + i <= n; i++) {
+		answer += countWaysMemo(curStep + i, n, jump, dp);
+	}
+
+	dp[curStep] = answer;
+
+	return answer;
+}
+
+
+//Using Tabulation
+
 
 int countWaysTab(int n, vector<int>&jump, vector<int>&dp) {
 	dp[n] = 1;
@@ -47,9 +72,6 @@ int countWaysTab(int n, vector<int>&jump, vector<int>&dp) {
 
 int main() {
 
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-
 	int n;
 	cin >> n;
 
@@ -61,7 +83,7 @@ int main() {
 
 	vector<int>dp(n + 1, 0);
 
-	int answer = countWaysTab(n, jump, dp);
+	int answer = countWaysMemo(0, n, jump, dp);
 
 	cout << answer << endl;
 
