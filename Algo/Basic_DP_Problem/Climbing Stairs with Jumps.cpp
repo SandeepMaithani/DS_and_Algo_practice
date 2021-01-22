@@ -40,12 +40,19 @@ int countWaysMemo(int curStep, int n, vector<int>&jump, vector<int>&dp) {
 		return 1;
 	}
 
-	cout << "hello" << curStep << endl
+	if (dp[curStep] != 0) {
+		return dp[curStep];
+	}
 
-	     int answer = 0;
+	int answer = 0;
 
 	for (int i = 1; i <= jump[curStep] && curStep + i <= n; i++) {
-		answer += countWaysMemo(curStep + i, n, jump, dp);
+		if (dp[curStep + i] != 0) {
+			answer += dp[curStep + i];
+		}
+		else {
+			answer += countWaysMemo(curStep + i, n, jump, dp);
+		}
 	}
 
 	dp[curStep] = answer;
