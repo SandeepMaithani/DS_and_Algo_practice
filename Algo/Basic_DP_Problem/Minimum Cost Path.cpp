@@ -26,6 +26,7 @@ Space Complexity: O(N*M). We will need a DP matrix to store min cost to reach th
 
 */
 
+
 #include <bits/stdc++.h>
 using namespace std;
 #define MOD 1000000007
@@ -54,13 +55,13 @@ int main() {
 		dp[i][0] = dp[i - 1][0] + maze[i][0];
 	}
 
-	for (int j = 1; i < m; j++) {
+	for (int j = 1; j < m; j++) {
 		dp[0][j] = dp[0][j - 1] + maze[0][j];
 	}
 
 	for (int i = 1; i < n; i++) {
 		for (int j = 1; j < m; j++) {
-			dp[i][j] = dp[i - 1][j - 1] + min(maze[i - 1][j], maze[i][j - 1]);
+			dp[i][j] = maze[i][j] + min(dp[i - 1][j], dp[i][j - 1]);
 		}
 	}
 
