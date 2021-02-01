@@ -16,8 +16,49 @@ different permutations of same combination. You should treat them as 1 and not 3
 
 */
 
+
 /*
 
 Complexity Analysis :-
 
+Time Complexity: O(N*M). We will look what amount we can change with a particular coin to do so and completly fill our dp vector
+we will pick all coin and all possible amount one by one which cost worst case time of O(N*M).
+
+Space Complexity: O(M). We will need a dp vector of size M+1 to memoize no of ways for a particular amount. Here M is given amount.
+
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define MOD 1000000007
+#define endl "\n"
+typedef long long int ll;
+
+int main() {
+
+	int n, amount;
+	cin >> n;
+
+	vector<int>coins(n);
+
+	for (int i = 0; i < n; i++) {
+		cin >> coins[i];
+	}
+
+	cin >> amount;
+
+	vector<int>dp(amount + 1, 0);
+
+	dp[0] = 1;
+
+	for (int i = 0; i < n; i++) {
+		for (int j = coins[i]; j <= amount; j++) {
+			dp[j] = dp[j] + dp[j - coins[i]];
+		}
+	}
+
+	cout << dp[amount] << endl;
+
+	return 0;
+}
